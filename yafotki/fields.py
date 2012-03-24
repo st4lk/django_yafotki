@@ -53,3 +53,12 @@ class YFField(FileField):
         kwargs.setdefault('upload_to', 'default')
         kwargs.setdefault('max_length', 255)
         super(YFField, self).__init__(*args, **kwargs)
+
+
+try:
+    from south.modelsinspector import add_introspection_rules
+
+    add_introspection_rules([], ["^yafotki\.fields\.YFField"])
+
+except ImportError:
+    pass
