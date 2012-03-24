@@ -42,7 +42,7 @@ class YFFieldFile(FieldFile):
                 except IndexError:
                     size = self.SIZES[sizes[-1]]
 
-            return default_url[:-2]+size
+            return default_url.replace('_orig', '_'+size)
         return default_url
 
 
