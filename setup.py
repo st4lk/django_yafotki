@@ -32,5 +32,5 @@ setup(
     package_dir={'yafotki': 'yafotki'},
     packages=packages,
     package_data={'yafotki': data_files},
-    requires = ['feedparser']
+    install_requires = ['feedparser']
 )
