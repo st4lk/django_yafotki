@@ -1,0 +1,53 @@
+Welcome
+=======
+
+Welcome to django-yafotki github page. Django-yafotki provides access to Yandex.Fotki picture storage from Django.
+This repository cloned from https://bitbucket.org/redsnow/django-yafotki. Author - Serge A Makarov.
+
+Installation
+------------
+
+Get source code from github
+
+    git clone git://github.com/glader/django_yafotki.git
+
+or install using pip
+
+    pip install -e git+https://github.com/glader/django_yafotki.git#egg=yafotki
+
+Add the django-yafotki/yafotki folder to your PYTHONPATH or install with setup.py
+
+Add your Yandex account info into settings.py
+
+    YAFOTKI_STORAGE_OPTIONS = {
+        'username': 'your_yandex_account_name',
+        'password': 'your_yandex_password'
+    }
+
+Add Yandex.Fotki field to your model
+
+    ...
+    from yafotki.fields import YFField
+    ...
+    class MyModel(models.Model):
+        ...
+        yandex_fotki_image = YFField(upload_to='album_name')
+        ...
+
+Using in views and templates
+----------------------------
+
+Use MyModel.yandex_fotki_image.src attribute for access to image source.
+
+    ...
+    <img src="{{ img.yandex_fotki_image.src }}" />
+    ...
+
+If you can access to different image sizes use MyModel.yandex_fotki_image.src_100, for access 100px width image, and MyModel.yandex_fotki_image.src for original image size
+
+    ...
+    <img src="{{ img.yandex_fotki_image.src_100 }}" width="100" /> <!-- 100px width image -->
+    ...
+    <img src="{{ img.yandex_fotki_image.src_300 }}" width="300" /> <!-- 300px width image -->
+    ...
+    <img src="{{ img.yandex_fotki_image.src }}"  /> <!-- Original image widht -->
