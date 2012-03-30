@@ -10,7 +10,8 @@ root_dir = os.path.dirname(__file__)
 
 for dirpath, dirnames, filenames in os.walk('yafotki'):
     for i, dirname in enumerate(dirnames):
-        if dirname.startswith('.'): del dirnames[i]
+        if dirname.startswith('.'):
+            del dirnames[i]
     if '__init__.py' in filenames:
         pkg = dirpath.replace(os.path.sep, '.')
         if os.path.altsep:
@@ -26,11 +27,11 @@ setup(
     description='Yandex.Fotki files backend for django',
     author='Serge A Makarov',
     author_email='serg.makar@gmail.com',
-    license = 'BSD Licence',
-    version = '0.2',
+    license='BSD Licence',
+    version='0.2',
     url='https://bitbucket.org/redsnow/django-yafotki',
     package_dir={'yafotki': 'yafotki'},
     packages=packages,
     package_data={'yafotki': data_files},
-    install_requires = ['feedparser']
+    install_requires=['feedparser']
 )

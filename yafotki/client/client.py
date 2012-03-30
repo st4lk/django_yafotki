@@ -9,8 +9,11 @@ import yarsa
 import http_client
 
 #TODO: Add exceptions for all errors
+
+
 class YFClientException(Exception):
     pass
+
 
 class YFCreateObjectException(YFClientException):
     pass
@@ -30,7 +33,7 @@ class YFClient(object):
     photoes_link = None
     atom_processor = None
 
-    def __init__(self, username = None, password = None):
+    def __init__(self, username=None, password=None):
         self.username = username
         self.password = password
         self.http_client = http_client.YaAtomHttpClient()
@@ -39,7 +42,6 @@ class YFClient(object):
         self.get_service_doc()
         if self.username and self.password:
             self.login()
-
 
     def login(self):
         self.get_rsa()
@@ -68,7 +70,7 @@ class YFClient(object):
     def get_albums(self):
         pass
 
-    def add_album(self, title, summary = None):
+    def add_album(self, title, summary=None):
         data = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:f="yandex:fotki"><title>%s</title><summary>%s</summary></entry>' % (title, summary,)
         response = self.http_client.post(self.albums_link, data, {
             'Content-Type': 'application/atom+xml; charset=utf-8; type=entry'

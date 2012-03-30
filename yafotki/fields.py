@@ -3,7 +3,7 @@
 import re
 from bisect import bisect
 
-from django.db.models.fields.files import  FieldFile,FileField
+from django.db.models.fields.files import  FieldFile, FileField
 from yafotki.storage import YFStorage
 
 
@@ -30,19 +30,18 @@ class YFFieldFile(FieldFile):
             return self.src(size=match.group(1))
         return super(YFFieldFile, self).__getattr__(name)
 
-
-    def src(self, size = None):
+    def src(self, size=None):
         default_url = self.storage.url(self.name)
         if size is not None:
             if size != 'orig':
                 sizes = self.SIZES.keys()
                 sizes.sort()
                 try:
-                    size = self.SIZES[sizes[bisect(sizes, int(size)-1)]]
+                    size = self.SIZES[sizes[bisect(sizes, int(size) - 1)]]
                 except IndexError:
                     size = self.SIZES[sizes[-1]]
 
-            return default_url.replace('_orig', '_'+size)
+            return default_url.replace('_orig', '_' + size)
         return default_url
 
 
