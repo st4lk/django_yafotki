@@ -10,15 +10,20 @@ from yafotki.client.client import YFClient
 
 #TODO: Make queries to YF(e.g Authorization in YF) only in
 class YFStorage(Storage):
-
     options = None
     yf_client = None
 
-    def __init__(self, options=None):
+    def __init__(self, options = None):
         self.options = options or settings.YAFOTKI_STORAGE_OPTIONS
-        self.yf_client = YFClient(self.options['username'], self.options['password'])
 
-    def _open(self, name, mode='rb'):
+    @property
+    def client(self):
+        if not self.yf_client:
+            self.yf_client = YFClient(self.options['username'], self.options['password'])
+
+        return self.yf_client
+
+    def _open(self, name, mode = 'rb'):
         pass
 
     def _save(self, name, content):
@@ -29,7 +34,8 @@ class YFStorage(Storage):
         content.seek(0)
         content_type = 'image/%s' % (imghdr.what(image_name, content.read(2048)))
         content.seek(0)
-        photo_obj = self.yf_client.add_photo(album_name, image_name, content.file, content_type)
+
+        photo_obj = self.client.add_photo(album_name, image_name, content.file, content_type)
         return photo_obj.entries[0].links[3].href
 
     def delete(self, name):
@@ -39,7 +45,8 @@ class YFStorage(Storage):
         album_name, file_name = os.path.split(name)
         if not album_name:
             album_name = 'default'
-        return self.yf_client.is_exist(album_name, file_name)
+
+        return self.client.is_exist(album_name, file_name)
 
     def listdir(self, path):
         pass
@@ -49,3 +56,5 @@ class YFStorage(Storage):
 
     def url(self, path):
         return path
+
+
