@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: django-yafotki
+Version: 0.2
+Summary: Yandex.Fotki files backend for django
+Home-page: https://bitbucket.org/redsnow/django-yafotki
+Author: Serge A Makarov
+Author-email: serg.makar@gmail.com
+License: BSD Licence
+Description: UNKNOWN
+Platform: UNKNOWN

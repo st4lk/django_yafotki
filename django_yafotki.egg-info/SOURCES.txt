@@ -1,0 +1,14 @@
+README
+django_yafotki.egg-info/PKG-INFO
+django_yafotki.egg-info/SOURCES.txt
+django_yafotki.egg-info/dependency_links.txt
+django_yafotki.egg-info/requires.txt
+django_yafotki.egg-info/top_level.txt
+yafotki/__init__.py
+yafotki/fields.py
+yafotki/storage.py
+yafotki/client/__init__.py
+yafotki/client/client.py
+yafotki/client/http.py
+yafotki/client/http_client.py
+yafotki/client/yarsa.py

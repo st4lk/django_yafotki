@@ -13,7 +13,7 @@ class YFStorage(Storage):
     options = None
     yf_client = None
 
-    def __init__(self, options = None):
+    def __init__(self, options=None):
         self.options = options or settings.YAFOTKI_STORAGE_OPTIONS
 
     @property
@@ -23,7 +23,7 @@ class YFStorage(Storage):
 
         return self.yf_client
 
-    def _open(self, name, mode = 'rb'):
+    def _open(self, name, mode='rb'):
         pass
 
     def _save(self, name, content):
@@ -56,5 +56,3 @@ class YFStorage(Storage):
 
     def url(self, path):
         return path
-
-

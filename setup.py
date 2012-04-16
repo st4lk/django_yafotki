@@ -10,7 +10,8 @@ root_dir = os.path.dirname(__file__)
 
 for dirpath, dirnames, filenames in os.walk('yafotki'):
     for i, dirname in enumerate(dirnames):
-        if dirname.startswith('.'): del dirnames[i]
+        if dirname.startswith('.'):
+            del dirnames[i]
     if '__init__.py' in filenames:
         pkg = dirpath.replace(os.path.sep, '.')
         if os.path.altsep:
@@ -32,5 +33,5 @@ setup(
     package_dir={'yafotki': 'yafotki'},
     packages=packages,
     package_data={'yafotki': data_files},
-    install_requires = ['feedparser']
+    install_requires=['feedparser']
 )

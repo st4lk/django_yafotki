@@ -9,8 +9,11 @@ import yarsa
 import http_client
 
 #TODO: Add exceptions for all errors
+
+
 class YFClientException(Exception):
     pass
+
 
 class YFCreateObjectException(YFClientException):
     pass
@@ -42,7 +45,6 @@ class YFClient(object):
         if self.username and self.password:
             self.login()
 
-
     def login(self):
         self.get_rsa()
         self.encrypted_login = yarsa.encrypt("<credentials login='%s' password='%s'/>" % (self.username, self.password,), self.rsa_key)
@@ -70,7 +72,7 @@ class YFClient(object):
     def get_albums(self):
         pass
 
-    def add_album(self, title, summary = None):
+    def add_album(self, title, summary=None):
         data = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:f="yandex:fotki"><title>%s</title><summary>%s</summary></entry>' % (title, summary,)
         response = self.http_client.post(self.albums_link, data, {
             'Content-Type': 'application/atom+xml; charset=utf-8; type=entry'

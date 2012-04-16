@@ -4,12 +4,12 @@ import httplib
 from urlparse import urlparse
 import types
 
+
 def parse_url(url):
     url_parts = urlparse(url)
     url = Url(url_parts)
     return url
 
-    
 
 class Url(object):
 
@@ -43,16 +43,16 @@ class YandexHttpClientException(Exception):
 DEFAULT_CONTENT_TYPE = 'application/atom+xml'
 DEFAULT_CHARSET = 'charset=utf-8'
 
+
 class HttpClient(object):
     debug = False
     headers = {}
 
-    def __init__(self, headers = None, debug = None):
+    def __init__(self, headers=None, debug=None):
         self.debug = debug or False
         self.headers = headers or {}
 
-
-    def request(self, method, url, data = None, headers = None):
+    def request(self, method, url, data=None, headers=None):
         all_headers = self.headers.copy()
         if headers:
             all_headers.update(headers)
@@ -72,8 +72,6 @@ class HttpClient(object):
         connection.request(method, url_object.path, data, all_headers)
         return connection.getresponse()
 
-
     def init_connection(self, url):
         url = parse_url(url)
         return httplib.HTTPConnection(url.host, url.port)
-   
