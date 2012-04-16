@@ -30,13 +30,15 @@ class YFClient(object):
     photoes_link = None
     atom_processor = None
 
-    def __init__(self, username = None, password = None):
+    def __init__(self, username=None, password=None, token=None):
         self.username = username
         self.password = password
-        self.http_client = http_client.YaAtomHttpClient()
+        self.http_client = http_client.YaAtomHttpClient(auth_token=token)
+
         if username is not None:
             self.service_doc_url = 'http://api-fotki.yandex.ru/api/users/%s/' % self.username
         self.get_service_doc()
+
         if self.username and self.password:
             self.login()
 
@@ -77,7 +79,7 @@ class YFClient(object):
             print "Album created"
             return feedparser.parse(response.read())
         else:
-            raise YFCreateObjectException("Yandex Says: %s - %s" % (response.status, response.reason,)).__class__, YFCreateObjectException
+            raise YFCreateObjectException("Yandex Says: %s - %s" % (response.status, response.reason))
 
     def add_photo(self, album, filename, content, content_type):
         if self.get_album_by_name(album):

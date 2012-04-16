@@ -19,7 +19,7 @@ class YFStorage(Storage):
     @property
     def client(self):
         if not self.yf_client:
-            self.yf_client = YFClient(self.options['username'], self.options['password'])
+            self.yf_client = YFClient(username=self.options['username'], token=self.options['token'])
 
         return self.yf_client
 

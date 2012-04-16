@@ -27,7 +27,7 @@ setup(
     author='Serge A Makarov',
     author_email='serg.makar@gmail.com',
     license = 'BSD Licence',
-    version = '0.2',
+    version = '0.3',
     url='https://bitbucket.org/redsnow/django-yafotki',
     package_dir={'yafotki': 'yafotki'},
     packages=packages,

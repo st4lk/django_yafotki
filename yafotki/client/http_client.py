@@ -7,7 +7,6 @@ class YaAtomHttpClient(object):
     auth_token = None
 
     def __init__(self, http_client = None, auth_token = None):
-
         self.http_client = http_client or http.HttpClient()
         self.auth_token = auth_token or None
 
@@ -19,7 +18,7 @@ class YaAtomHttpClient(object):
         if headers:
             request_headers.update(headers)
         if self.auth_token:
-            request_headers['Authorization'] = 'FimpToken realm="fotki.yandex.ru", token="%s"' % self.auth_token
+            request_headers['Authorization'] = 'OAuth %s' % self.auth_token
 
         return self.http_client.request(method, uri, data,request_headers)
 
