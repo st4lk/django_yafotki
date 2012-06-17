@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: django-yafotki
-Version: 0.2
+Version: 0.3
 Summary: Yandex.Fotki files backend for django
 Home-page: https://bitbucket.org/redsnow/django-yafotki
 Author: Serge A Makarov

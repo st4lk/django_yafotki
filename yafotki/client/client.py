@@ -78,7 +78,6 @@ class YFClient(object):
             'Content-Type': 'application/atom+xml; charset=utf-8; type=entry'
         })
         if response.status == 201:
-            print "Album created"
             return feedparser.parse(response.read())
         else:
             raise YFCreateObjectException("Yandex Says: %s - %s" % (response.status, response.reason))
@@ -90,7 +89,6 @@ class YFClient(object):
             album_entry = self.add_album(album).entries[0]
         headers = dict()
         headers['Content-Type'] = content_type
-        headers['Slug'] = os.path.basename(filename)
         new_photo_response = self.http_client.post(album_entry.links[2].href, content, headers).read()
         return feedparser.parse(new_photo_response)
 
