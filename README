@@ -21,8 +21,10 @@ Add your Yandex account info into settings.py
 
     YAFOTKI_STORAGE_OPTIONS = {
         'username': 'your_yandex_account_name',
-        'password': 'your_yandex_password'
+        'token': 'your_token'
     }
+
+You can obtain token by following instructions at page http://api.yandex.ru/oauth/doc/dg/tasks/get-oauth-token.xml
 
 Add Yandex.Fotki field to your model
 
