@@ -19,6 +19,9 @@ class YFStorage(Storage):
     @property
     def client(self):
         if not self.yf_client:
+            if 'token' in self.options and not self.options['token']:
+                raise ValueError('You should provide token to access to yandex.fotki service.')
+
             self.yf_client = YFClient(username=self.options['username'], token=self.options['token'])
 
         return self.yf_client
