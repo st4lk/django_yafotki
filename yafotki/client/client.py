@@ -63,7 +63,7 @@ class YFClient(object):
         self.http_client.set_token(self.token)
 
     def get_service_doc(self):
-        service_doc = self.http_client.get(self.service_doc_url).read()
+        service_doc = self.http_client.get(self.service_doc_url).content
         service_tree = ElementTree.fromstring(service_doc)
         service_collections = service_tree.findall('{%s}workspace/{%s}collection' % (self.APP_NAMESPACE, self.APP_NAMESPACE))
         self.albums_link = service_collections[0].get('href')
@@ -77,10 +77,10 @@ class YFClient(object):
         response = self.http_client.post(self.albums_link, data, {
             'Content-Type': 'application/atom+xml; charset=utf-8; type=entry'
         })
-        if response.status == 201:
-            return feedparser.parse(response.read())
+        if response.status_code == 201:
+            return feedparser.parse(response.content)
         else:
-            raise YFCreateObjectException("Yandex Says: %s - %s" % (response.status, response.reason))
+            raise YFCreateObjectException("Yandex Says: %s - %s" % (response.status_code, response.reason))
 
     def add_photo(self, album, filename, content, content_type):
         if self.get_album_by_name(album):
@@ -89,11 +89,11 @@ class YFClient(object):
             album_entry = self.add_album(album).entries[0]
         headers = dict()
         headers['Content-Type'] = content_type
-        new_photo_response = self.http_client.post(album_entry.links[2].href, content, headers).read()
+        new_photo_response = self.http_client.post(album_entry.links[2].href, content, headers).content
         return feedparser.parse(new_photo_response)
 
     def get_album_by_name(self, album_title):
-        albums_data = self.http_client.get(self.albums_link).read()
+        albums_data = self.http_client.get(self.albums_link).content
         f = feedparser.parse(albums_data)
         for entry in f.entries:
             if entry.title == album_title:
@@ -103,7 +103,7 @@ class YFClient(object):
     def get_album_photoes(self, album_name):
         album = self.get_album_by_name(album_name)
         list_link = album.links[2].href
-        list_xml = self.http_client.get(list_link).read()
+        list_xml = self.http_client.get(list_link).content
         f = feedparser.parse(list_xml)
         return f.entries
 
@@ -112,7 +112,7 @@ class YFClient(object):
         return False
 
     def get_rsa(self):
-        rsa_data = self.http_client.get(self.rsa_url).read()
+        rsa_data = self.http_client.get(self.rsa_url).content
         xml = minidom.parseString(rsa_data)
         rsa_key_node = xml.getElementsByTagName('key')[0]
         self.rsa_key = rsa_key_node.firstChild.nodeValue.encode('ascii')

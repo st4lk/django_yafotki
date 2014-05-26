@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 
-import httplib
+import requests
 from urlparse import urlparse
 import types
 
@@ -68,10 +68,6 @@ class HttpClient(object):
         if 'Host' not in all_headers:
             if url_object.host:
                 all_headers['Host'] = url_object.host
-        connection = self.init_connection(url)
-        connection.request(method, url_object.path, data, all_headers)
-        return connection.getresponse()
 
-    def init_connection(self, url):
-        url = parse_url(url)
-        return httplib.HTTPConnection(url.host, url.port)
+        response = requests.request(method, url, data=data, headers=all_headers)
+        return response

@@ -31,8 +31,9 @@ class YFStorage(Storage):
 
     def _save(self, name, content):
         album_name, image_name = os.path.split(name)
+        if 'album' in self.options:
+            album_name = self.options['album']
         if not album_name:
-            #TODO: Get default album from config
             album_name = 'default'
         content.seek(0)
         content_type = 'image/%s' % (imghdr.what(image_name, content.read(2048)))
