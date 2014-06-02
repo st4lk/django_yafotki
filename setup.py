@@ -3,7 +3,7 @@
 import os
 from distutils.core import setup
 
-VERSION = '0.7.2' 
+VERSION = '0.7.3' 
 
 if __name__ == '__main__':
     setup(
@@ -14,7 +14,7 @@ if __name__ == '__main__':
         url = 'https://github.com/glader/django_yafotki',
         name = 'django_yafotki',
         packages = ['yafotki', 'yafotki/client'],
-        requires = ['feedparser', 'requests'],
+        install_requires = ['feedparser', 'requests'],
 
         license = "BSD",
         keywords = "django yafotki",
