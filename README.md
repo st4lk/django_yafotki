@@ -7,15 +7,14 @@ This repository cloned from https://bitbucket.org/redsnow/django-yafotki. Author
 Installation
 ------------
 
-Get source code from github
+Install using pip
+
+    pip install django_yafotki
+
+or get source code from github
 
     git clone git://github.com/glader/django_yafotki.git
 
-or install using pip
-
-    pip install -e git+https://github.com/glader/django_yafotki.git#egg=yafotki
-
-Add the django-yafotki/yafotki folder to your PYTHONPATH or install with setup.py
 
 Add your Yandex account info into settings.py
 
@@ -53,3 +52,11 @@ If you can access to different image sizes use MyModel.yandex_fotki_image.src_10
     <img src="{{ img.yandex_fotki_image.src_300 }}" width="300" /> <!-- 300px width image -->
     ...
     <img src="{{ img.yandex_fotki_image.src }}"  /> <!-- Original image widht -->
+
+
+Using with django-wysiwyg-redactor
+----------------------------------
+
+You can set up django_yafotki to upload images from wysiwyg redactor directly to Fotki without any model. Just set a handler
+
+    REDACTOR_UPLOAD_HANDLER = 'yafotki.handlers.FotkiUploader'
