@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 import os
+import re
 import imghdr
 import requests
 
@@ -28,7 +29,8 @@ class YFStorage(Storage):
         return self.yf_client
 
     def _open(self, name, mode='rb'):
-        return requests.get(name, stream=True).raw
+        if re.match('https?://', name):
+            return requests.get(name, stream=True).raw
 
     def _save(self, name, content):
         album_name, image_name = os.path.split(name)
